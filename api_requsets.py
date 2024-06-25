@@ -1,12 +1,13 @@
 from flask import json
-from .config import CLIENT_ID, TOKEN, SERVER_URL, MY_USER_ID
+from config import CLIENT_ID, TOKEN, SERVER_URL, MY_USER_ID
 import requests
-from loguru import logger
+from logging import debug
 
 
 class ApiRequests:
     def __init__(self) -> None:
         self.bearer_token, self.expire_token = self.login()
+
 
     def login(self):
         data = {

@@ -1,9 +1,9 @@
 from datetime import timedelta
 from flask import Blueprint, request, Response
 from loguru import logger
-from .database import store
-from .api_requsets import ApiRequests
-from .texts import (
+from database import store
+from api_requsets import ApiRequests
+from texts import (
                     hello_text,
                     first_var_text,
                     second_var_text,
@@ -11,8 +11,8 @@ from .texts import (
                     tg_message_text
                     )
 # from asyncio import sleep as asleep
-from .bot import send_tg_message
-from .config import MY_USER_ID
+from bot import send_tg_message
+from config import MY_USER_ID
 
 router = Blueprint('route', __name__)
 

@@ -1,5 +1,5 @@
 import telebot
-from .config import TG_TOKEN, TG_CHAT_ID
+from config import TG_TOKEN, TG_CHAT_ID
 
 def send_tg_message(text):
     bot = telebot.TeleBot(TG_TOKEN)
