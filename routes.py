@@ -24,10 +24,14 @@ def event_handler():
     user_id = data["payload"]["value"]["user_id"]
     api = ApiRequests()
     step = store.get(chat_id)
+    stop_list = [ MY_USER_ID, 0]
     logger.error(request.json)
     if user_id == data["payload"]["value"]["author_id"]:
         return Response(status=200)
 
+    if data["payload"]["value"]["author_id"] in stop_list:
+        return Response(status=200)
+    
     if store.get(data["id"]):
         return Response(status=200)
 
@@ -43,24 +47,25 @@ def event_handler():
         store.set(chat_id, "1")
 
     else:
-        message = data["payload"]["value"]["content"]["text"]
-        logger.debug(message)
-        
-        if step == b"1":
-            match message:
-                case "1":
-                    if store.get(f"{chat_id}:m1") is None:
-                        api.send_message(first_var_text, chat_id, user_id)
-                        store.set(f"{chat_id}:m1", "sended")
-                case "2":
-                    if store.get(f"{chat_id}:m2") is None:
-                        api.send_message(second_var_text, chat_id, user_id)
-                        store.set(f"{chat_id}:m2", "sended")
-                case "3":
-                    if store.get(f"{chat_id}:m3") is None:
-                        api.send_message(third_var_text, chat_id, user_id)
-                        store.set(f"{chat_id}:m3", "sended")
-            # store.set(chat_id, "3")
+        if "text" in data["payload"]["value"]["content"]:
+            message = data["payload"]["value"]["content"]["text"]
+            logger.debug(message)
+            
+            if step == b"1":
+                match message:
+                    case "1":
+                        if store.get(f"{chat_id}:m1") is None:
+                            api.send_message(first_var_text, chat_id, user_id)
+                            store.set(f"{chat_id}:m1", "sended")
+                    case "2":
+                        if store.get(f"{chat_id}:m2") is None:
+                            api.send_message(second_var_text, chat_id, user_id)
+                            store.set(f"{chat_id}:m2", "sended")
+                    case "3":
+                        if store.get(f"{chat_id}:m3") is None:
+                            api.send_message(third_var_text, chat_id, user_id)
+                            store.set(f"{chat_id}:m3", "sended")
+                # store.set(chat_id, "3")
     store.set(data["id"], "used")
     return "Ok"
 

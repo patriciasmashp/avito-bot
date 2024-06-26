@@ -5,7 +5,7 @@ load_dotenv()
 TOKEN = os.environ["AVITO_TOKEN"]
 CLIENT_ID = os.environ["AVITO_CLIENT_ID"]
 API_URL = "https://api.avito.ru"
-SERVER_URL = "https://b4f1-188-19-76-134.ngrok-free.app"
+SERVER_URL = os.environ["SERVER_URL"]
 REDIS_RUL = os.environ["REDIS_URL"]
 TG_TOKEN = os.environ["TG_TOKEN"]
 MY_USER_ID = os.environ["MY_USER_ID"]

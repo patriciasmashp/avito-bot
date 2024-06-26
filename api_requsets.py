@@ -1,7 +1,8 @@
 from flask import json
+from loguru import logger
 from config import CLIENT_ID, TOKEN, SERVER_URL, MY_USER_ID
 import requests
-from logging import debug
+
 
 
 class ApiRequests:
